@@ -3,15 +3,13 @@ function getComputerChoice() {
     return(random(3));
 }
 
-function playerChoice() {
+function playerChoice(String) {
 
-    let playerChoice = prompt("Whats your move?");
+    let playerChoice = String.toUpperCase();
 
-    let playerChoiceCI = playerChoice.toUpperCase();
-
-    if (playerChoiceCI == "ROCK") {
+    if (playerChoice == "ROCK") {
         return 1;
-    } else if (playerChoiceCI == "PAPER") {
+    } else if (playerChoice == "PAPER") {
         return 2;
     } else {
         return 3;
@@ -43,36 +41,14 @@ function random(number) {
     return Math.floor(Math.random() * number) + 1;
 }
 
-function game() {
+function scoreChange()
 
-    let playerWins = 0
-    ,   computerWins = 0;
+const buttons = document.querySelectorAll(".buttonRPS");
+buttons.forEach(button => button.addEventListener("click", function(e){
 
-    for (let i = 0; i < 5; i++) {
-        let currentRun = playRound(playerChoice(), getComputerChoice());
-        console.log(currentRun);
+    let computerChoice = getComputerChoice();
+    let playerMove = playerChoice(e.target.value);
+    console.log(playRound(playerMove, computerChoice));
 
-        if (currentRun == "Player wins") {
-            playerWins++;
-        } else if (currentRun == "Computer Wins") {
 
-            computerWins++;
-        }
-
-        console.log(playerWins);
-        console.log(computerWins);
-    }
-
-    if (playerWins > computerWins) {
-        return "Player Wins Game!";
-    } else if (computerWins > playerWins) {
-        return "Computer Wins Game!";
-    } else {
-        return "Tie!";
-    }
-
-}
-
-let run = game();
-
-console.log(run);
+}));
